@@ -52,11 +52,12 @@ def iniciar_servidor():
         dados = conn.recv(TAMANHO_BUFFER)
 
         if dados:
+            total_mensagens += 1
             mensagem = dados.decode("utf-8")
-            log(f"[SERVIDOR] Mensagem recebida: '{mensagem}'")
+            log(f"[SERVIDOR] Mensagem #{total_mensagens} recebida: '{mensagem}'")
 
             # 6. Devolver a mensagem ao cliente (eco)
-            resposta = mensagem
+            resposta = mensagem.upper()
             conn.sendall(resposta.encode("utf-8"))
             log(f"[SERVIDOR] Eco enviado: '{resposta}'")
 
